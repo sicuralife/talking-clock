@@ -1,6 +1,7 @@
 # Talking Clock - Multilingual Time Announcement
 
-This project provides a talking clock that announces the current time in French, English, German, and Italian. It uses pre-recorded audio files and assembles them dynamically based on the current time.
+This project provides a talking clock that announces the current time in French, English, German, and Italian.
+It uses pre-recorded audio files and assembles them dynamically based on the current time.
 
 ## Supported Languages & Their Specificities
 
@@ -17,7 +18,7 @@ This project provides a talking clock that announces the current time in French,
   - 45 minutes past → "quarter to"
   - Minutes greater than 30 use "to" with the next hour (e.g., 8:50 → "It is ten to nine.")
 
-### 3️⃣ German (de)
+### [3] German (de)
 - Uses "Es ist" at the beginning.
 - Uses "Uhr" after the hour for full hours.
 - Special cases:
@@ -26,33 +27,17 @@ This project provides a talking clock that announces the current time in French,
   - 45 minutes past → "Viertel vor"
   - Minutes greater than 30 use "vor" with the next hour (e.g., 8:50 → "Es ist zehn vor neun.")
 
-### 4️⃣ Italian (it)
-- Uses "È" at the beginning.
-- Uses "le" for most hours except 1:00, which uses "l'" (e.g., "È l'una" instead of "È le uno").
-- Uses "ore" after the hour unless it is noon (mezzogiorno) or midnight (mezzanotte).
-- Special cases:
-  - 12:00 → "È mezzogiorno."
-  - 00:00 → "È mezzanotte."
-  - 15 minutes past → "e un quarto"
-  - 30 minutes past → "e mezza"
-  - 45 minutes past → "meno un quarto"
-  - Minutes greater than 30 use "meno" with the next hour (e.g., 8:50 → "È le nove meno dieci.")
-
-## How It Works
-- The script determines the current time and selects the appropriate audio files.
-- It concatenates them smoothly and plays the final announcement.
-- Each language follows its natural way of telling time.
+### [4] Italian (it)
+- Uses "È la" at the beginning when hour is 1, "Sono le" otherwise.
+- Uses "ore" after the hour
 
 ## Usage
-1. Ensure you have the required audio files in the `audio/` directory.
-2. Run the script and choose a language: `python talking_clock.py`
-3. The script will play the time announcement in the selected language.
-
-Enjoy your multilingual talking clock! 🎙️⏰
+1. Install dependencies `sudo apt install python-pydub`
+2. Run the script and choose a language: `python main.py`
 
 ## Audio file generation
 Audio files generated from the Text-to-Speech engine https://www.narakeet.com/
 - French Swiss, voice Ariane
 - English - British, Amy
 - German Swiss - Heidi
-- Italian - Isabella
+- Italian - Alessandra

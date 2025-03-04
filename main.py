@@ -57,9 +57,11 @@ def get_german_audio_files(hour, minute):
     elif minute == 15:
         files = [f"{base_path}es_ist.mp3", f"{base_path}viertel_nach.mp3", f"{base_path}{hour}.mp3"]
     elif minute == 30:
-        files = [f"{base_path}es_ist.mp3", f"{base_path}halb_nach.mp3", f"{base_path}{(hour + 1 ) % 12}.mp3"]
+        files = [f"{base_path}es_ist.mp3", f"{base_path}halb.mp3", f"{base_path}{(hour + 1 ) % 12}.mp3"]
+    elif minute == 45:
+        files = [f"{base_path}es_ist.mp3", f"{base_path}viertel_vor.mp3", f"{base_path}{(hour + 1 ) % 12}.mp3"]
     elif minute < 30:
-        files = [f"{base_path}es_ist.mp3", f"{base_path}{minute}.mp3", f"{base_path}nach.mp3", f"{base_path}{(hour + 1 ) % 12}.mp3"]
+        files = [f"{base_path}es_ist.mp3", f"{base_path}{minute}.mp3", f"{base_path}nach.mp3", f"{base_path}{hour}.mp3"]
     else: 
         files = [f"{base_path}es_ist.mp3", f"{base_path}{60 - minute}.mp3", f"{base_path}vor.mp3", f"{base_path}{hour + 1 % 12}.mp3"]
     
