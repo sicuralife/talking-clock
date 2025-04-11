@@ -8,28 +8,27 @@ It uses pre-recorded audio files and assembles them dynamically based on the cur
 ### [1] French (fr)
 - Uses "Il est" at the beginning of the sentence.
 - Uses "heures" after the hour
+- Uses "minuit" for the hour 0
 
 ### [2] English (en)
 - Uses "It is" at the beginning.
 - Uses "o'clock" for full hours.
-- Special cases:
-  - 15 minutes past → "quarter past"
-  - 30 minutes past → "half past"
-  - 45 minutes past → "quarter to"
-  - Minutes greater than 30 use "to" with the next hour (e.g., 8:50 → "It is ten to nine.")
+- Indicates am for the morning time and pm for the afternoon time
+- Uses midnight for the hour 0
+- Uses noon for the hour 12
 
 ### [3] German (de)
 - Uses "Es ist" at the beginning.
 - Uses "Uhr" after the hour for full hours.
-- Special cases:
-  - 15 minutes past → "Viertel nach"
-  - 30 minutes past → "halb" with the next hour
-  - 45 minutes past → "Viertel vor"
-  - Minutes greater than 30 use "vor" with the next hour (e.g., 8:50 → "Es ist zehn vor neun.")
+- Uses "mitternach" for the hour 0
 
 ### [4] Italian (it)
-- Uses "È la" at the beginning when hour is 1, "Sono le" otherwise.
 - Uses "ore" after the hour
+- Uses "E mezzanotte" for the hour 0
+- Uses "E la" for the hour 1
+- Uses "Sono le" for all others hours
+- Uses "e" then minutes if minutes != 0
+
 
 ## Usage
 1. Install dependencies `sudo apt install python-pydub`
@@ -37,7 +36,7 @@ It uses pre-recorded audio files and assembles them dynamically based on the cur
 
 ## Audio file generation
 Audio files generated from the Text-to-Speech engine https://www.narakeet.com/
-- French Swiss, voice Ariane
+- French Swiss, Ariane
 - English - British, Amy
 - German Swiss - Heidi
 - Italian - Alessandra
