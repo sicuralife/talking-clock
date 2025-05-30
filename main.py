@@ -69,6 +69,8 @@ def get_german_audio_files(hour, minute):
 
     if hour == 0:
         files.append(f"{base_path}mitternacht.mp3")
+    elif hour == 1:
+        files.append(f"{base_path}1s.mp3")
     else:
         files.append(f"{base_path}{hour}.mp3")
         files.append(f"{base_path}uhr.mp3")
@@ -98,6 +100,43 @@ def get_italian_audio_files(hour, minute):
     
     return files
 
+def vibrate_time(hour, minute):
+
+    hour_12 = hour % 12 if hour % 12 != 0 else 12
+
+    hour_long = hour_12 // 5
+    hour_short = hour_12 % 5
+
+    minute_10 = minute // 10
+    minute_1 = minute % 10
+
+    minute_10_long = minute_10 // 5
+    minute_10_short = minute_10 % 5
+    minute_1_long = minute_1 // 5
+    minute_1_short = minute_1 % 5
+
+    for _ in range(hour_long):
+        print("💥 long")
+        print("pause 0.5")
+    for _ in range(hour_short):
+        print("💢 short")
+        print("pause 0.5")
+    print("pause 1 second")
+    for _ in range(minute_10_long):
+        print("💥 long")
+        print("pause 0.5")
+    for _ in range(minute_10_short):
+        print("💢 short")
+        print("pause 0.5")
+    print("pause 1 second")
+    for _ in range(minute_1_long):
+        print("💥 long")
+        print("pause 0.5")
+    for _ in range(minute_1_short):
+        print("💢 short")
+        print("pause 0.5")
+    return True
+
 def get_audio_files(hour, minute, language):
     """Returns audio files based on the chosen language."""
     if language == "fr":
@@ -117,11 +156,13 @@ def speak_time(language, hour, minute):
     play(combined_audio)
 
 if __name__ == "__main__":
-    language = input("Choose a language (fr, en, de, it): ").strip().lower()
+    language = input("Choose a language (fr, en, de, it, vibration): ").strip().lower()
     hour = int(input("hour: ").strip().lower())
     minute = int(input("minute: ").strip().lower())
-    if language not in ["fr", "en", "de", "it"]:
+    if language not in ["fr", "en", "de", "it", "vibration"]:
         print("Unsupported language.")
+    elif language == "vibration":
+        vibrate_time(hour,minute)
     else:
         if(hour > 24 or minute > 59):
             print("Wrong time.")
