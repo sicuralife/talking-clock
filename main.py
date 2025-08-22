@@ -1,4 +1,5 @@
 import datetime
+import threading
 import os
 from pydub import AudioSegment
 from pydub.playback import play
@@ -100,6 +101,23 @@ def get_italian_audio_files(hour, minute):
     
     return files
 
+def get_input(prompt, timeout):
+    user_input = [None]
+
+    def ask():
+        user_input[0] = input(prompt)
+
+    thread = threading.Thread(target=ask)
+    thread.daemon = True
+    thread.start()
+    thread.join(timeout)
+
+    if thread.is_alive():
+        print("\n⏰ Timeout exceeded.")
+        return None
+    else:
+        return user_input[0]
+    
 def vibrate_time(hour, minute):
 
     hour_12 = hour % 12 if hour % 12 != 0 else 12
@@ -116,26 +134,30 @@ def vibrate_time(hour, minute):
     minute_1_short = minute_1 % 5
 
     for _ in range(hour_long):
-        print("💥 long")
+        print("💥 vibrate long")
         print("pause 0.5")
     for _ in range(hour_short):
-        print("💢 short")
+        print("💢 vibrate short")
         print("pause 0.5")
-    print("pause 1 second")
-    for _ in range(minute_10_long):
-        print("💥 long")
-        print("pause 0.5")
-    for _ in range(minute_10_short):
-        print("💢 short")
-        print("pause 0.5")
-    print("pause 1 second")
-    for _ in range(minute_1_long):
-        print("💥 long")
-        print("pause 0.5")
-    for _ in range(minute_1_short):
-        print("💢 short")
-        print("pause 0.5")
-    return True
+    print("waiting for the second press within 15seconds")
+    result = get_input("Press anything (button pressed 1 second on the watch)", 15)
+    if result is not None:
+        for _ in range(minute_10_long):
+            print("💥 vibrate long")
+            print("pause 0.5")
+        for _ in range(minute_10_short):
+            print("💢 vibrate short")
+            print("pause 0.5")
+        print("waiting for the third press within 15 seconds")
+        result = get_input("Press anything (button pressed 1 second on the watch)", 15)
+        if result is not None:
+            for _ in range(minute_1_long):
+                print("💥 vibrate long")
+                print("pause 0.5")
+            for _ in range(minute_1_short):
+                print("💢 vibrate short")
+                print("pause 0.5")
+            return True
 
 def get_audio_files(hour, minute, language):
     """Returns audio files based on the chosen language."""
