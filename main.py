@@ -32,7 +32,7 @@ def get_english_audio_files(hour, minute):
     if hour == 0:
         hour_12 = 0
     else:
-        hour_12 = hour % 12 if hour % 12 != 0 else 12
+        hour_12 = 12 if hour in (0,12) else hour % 12
     period = "am.mp3" if hour < 12 else "pm.mp3"
     
     files = []
@@ -145,7 +145,7 @@ def speak_time(language, hour, minute):
     audio_files = get_audio_files(hour, minute, language)
     combined_audio = concatenate_audio(audio_files)
     play(combined_audio)
-    combined_audio.export(f"{hour}{minute}.mp3", format="mp3")
+    # combined_audio.export(f"{hour}{minute}.mp3", format="mp3")
 
 if __name__ == "__main__":
     language = input("Choose a language (fr, en, de, it, vibration): ").strip().lower()
