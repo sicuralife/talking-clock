@@ -29,10 +29,7 @@ def get_english_audio_files(hour, minute):
     """Returns audio files for time in English."""
     base_path = "audio/en/"
 
-    if hour == 0:
-        hour_12 = 0
-    else:
-        hour_12 = 12 if hour in (0,12) else hour % 12
+    hour_12 = 12 if hour in (0,12) else hour % 12
     period = "am.mp3" if hour < 12 else "pm.mp3"
     
     files = []
@@ -41,8 +38,8 @@ def get_english_audio_files(hour, minute):
     if minute != 0:
         files.append(f"{base_path}{minute}.mp3")
     
-    if hour_12 != 0:
-        files.append(f"{base_path}{period}")
+
+    files.append(f"{base_path}{period}")
 
     return files
 
